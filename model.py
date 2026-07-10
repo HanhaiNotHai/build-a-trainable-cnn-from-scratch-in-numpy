@@ -50,7 +50,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 
-def stable_softmax(logits: NDArray) -> NDArray:
+def stable_softmax(logits: NDArray):
     '''Compute a numerically stable softmax row-wise over (N, C) logits.'''
 
     exp_logits = exp_shifted(logits)
@@ -68,8 +68,10 @@ def one_hot(labels: NDArray, num_classes: int) -> NDArray:
     matrix[np.arange(labels.size), labels] = 1
     return matrix
 
-# Step 7 - gather_true_class_probs (not yet solved)
-# TODO: implement
+# Step 7 - gather_true_class_probs
+def gather_true_class_probs(probs, labels):
+    # TODO: return probs[i, labels[i]] for every row i as a 1D length-N array.
+    pass
 
 # Step 8 - cross_entropy_loss (not yet solved)
 # TODO: implement
