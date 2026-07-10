@@ -61,7 +61,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 
-def one_hot(labels: NDArray, num_classes: int) -> NDArray:
+def one_hot(labels: NDArray, num_classes: int):
     '''convert integer labels into a (N, num_classes) one-hot float matrix'''
 
     matrix = np.zeros((labels.size, num_classes))
