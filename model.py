@@ -15,8 +15,15 @@ def argmax_rows(matrix: NDArray):
 
     return matrix.argmax(axis=-1)
 
-# Step 2 - row_max (not yet solved)
-# TODO: implement
+# Step 2 - row_max
+import numpy as np
+from numpy.typing import NDArray
+
+
+def row_max(matrix: NDArray):
+    '''return the maximum value of each row of `matrix` with keepdims True for broadcasting.'''
+
+    return matrix.max(axis=-1, keepdims=True)
 
 # Step 3 - row_sum (not yet solved)
 # TODO: implement
