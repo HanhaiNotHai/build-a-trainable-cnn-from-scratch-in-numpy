@@ -35,8 +35,15 @@ def row_sum(matrix: NDArray) -> NDArray:
 
     return matrix.sum(axis=-1, keepdims=True)
 
-# Step 4 - exp_shifted (not yet solved)
-# TODO: implement
+# Step 4 - exp_shifted
+import numpy as np
+from numpy.typing import NDArray
+
+
+def exp_shifted(logits: NDArray) -> NDArray:
+    """Subtract per-row max from logits and exponentiate elementwise."""
+
+    return np.exp(logits - row_max(logits))
 
 # Step 5 - stable_softmax (not yet solved)
 # TODO: implement
