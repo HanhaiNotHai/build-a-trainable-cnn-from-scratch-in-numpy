@@ -69,9 +69,13 @@ def one_hot(labels: NDArray, num_classes: int):
     return matrix
 
 # Step 7 - gather_true_class_probs
-def gather_true_class_probs(probs, labels):
-    # TODO: return probs[i, labels[i]] for every row i as a 1D length-N array.
-    pass
+from numpy.typing import NDArray
+
+
+def gather_true_class_probs(probs: NDArray, labels: NDArray):
+    '''return probs[i, labels[i]] for every row i as a 1D length-N array.'''
+
+    return probs[np.arange(labels.size), labels]
 
 # Step 8 - cross_entropy_loss (not yet solved)
 # TODO: implement
