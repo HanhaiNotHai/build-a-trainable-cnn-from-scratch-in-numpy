@@ -10,7 +10,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 
-def argmax_rows(matrix: NDArray):
+def argmax_rows(matrix: NDArray) -> NDArray:
     '''return the index of the largest element in each row of a 2D array'''
 
     return matrix.argmax(axis=-1)
