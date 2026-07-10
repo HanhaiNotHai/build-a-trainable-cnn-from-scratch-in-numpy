@@ -45,8 +45,16 @@ def exp_shifted(logits: NDArray) -> NDArray:
 
     return np.exp(logits - row_max(logits))
 
-# Step 5 - stable_softmax (not yet solved)
-# TODO: implement
+# Step 5 - stable_softmax
+import numpy as np
+from numpy.typing import NDArray
+
+
+def stable_softmax(logits: NDArray) -> NDArray:
+    '''Compute a numerically stable softmax row-wise over (N, C) logits.'''
+
+    exp_logits = exp_shifted(logits)
+    return exp_logits / row_sum(exp_logits)
 
 # Step 6 - one_hot (not yet solved)
 # TODO: implement
