@@ -56,8 +56,17 @@ def stable_softmax(logits: NDArray) -> NDArray:
     exp_logits = exp_shifted(logits)
     return exp_logits / row_sum(exp_logits)
 
-# Step 6 - one_hot (not yet solved)
-# TODO: implement
+# Step 6 - one_hot
+import numpy as np
+from numpy.typing import NDArray
+
+
+def one_hot(labels: NDArray, num_classes: int) -> NDArray:
+    '''convert integer labels into a (N, num_classes) one-hot float matrix'''
+
+    matrix = np.zeros((labels.size, num_classes))
+    matrix[np.arange(labels.size), labels] = 1
+    return matrix
 
 # Step 7 - gather_true_class_probs (not yet solved)
 # TODO: implement
