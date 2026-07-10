@@ -20,7 +20,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 
-def row_max(matrix: NDArray):
+def row_max(matrix: NDArray) -> NDArray:
     '''return the maximum value of each row of `matrix` with keepdims True for broadcasting.'''
 
     return matrix.max(axis=-1, keepdims=True)
