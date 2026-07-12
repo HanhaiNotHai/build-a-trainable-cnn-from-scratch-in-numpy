@@ -117,8 +117,14 @@ def he_init(shape: tuple[int, ...], fan_in: int, seed=None):
     np.random.seed(seed)
     return np.random.normal(0, he_std(fan_in), shape)
 
-# Step 12 - init_zero_bias (not yet solved)
-# TODO: implement
+# Step 12 - init_zero_bias
+import numpy as np
+
+
+def init_zero_bias(length: int):
+    '''return a 1D float array of zeros with the given length.'''
+
+    return np.zeros(length)
 
 # Step 13 - pad_2d (not yet solved)
 # TODO: implement
