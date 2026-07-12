@@ -126,8 +126,15 @@ def init_zero_bias(length: int):
 
     return np.zeros(length)
 
-# Step 13 - pad_2d (not yet solved)
-# TODO: implement
+# Step 13 - pad_2d
+import numpy as np
+from numpy.typing import NDArray
+
+
+def pad_2d(images: NDArray, pad: int):
+    '''zero-pad the spatial (H, W) dims of a 4D (N, C, H, W) tensor by `pad` on each side.'''
+
+    return np.pad(images, ((0, 0), (0, 0), (pad, pad), (pad, pad)))
 
 # Step 14 - output_spatial_size (not yet solved)
 # TODO: implement
