@@ -107,8 +107,15 @@ def he_std(fan_in: int) -> float:
 
     return np.sqrt(2 / fan_in)
 
-# Step 11 - he_init (not yet solved)
-# TODO: implement
+# Step 11 - he_init
+import numpy as np
+
+
+def he_init(shape: tuple[int, ...], fan_in: int, seed=None):
+    '''sample a weight tensor from a normal distribution scaled by He std using the seed.'''
+
+    np.random.seed(seed)
+    return np.random.normal(0, he_std(fan_in), shape)
 
 # Step 12 - init_zero_bias (not yet solved)
 # TODO: implement
