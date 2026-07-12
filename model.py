@@ -88,8 +88,15 @@ def cross_entropy_loss(probs: NDArray, labels: NDArray, eps: float = 1e-12):
 
     return -np.mean(np.log(gather_true_class_probs(probs + eps, labels)))
 
-# Step 9 - accuracy (not yet solved)
-# TODO: implement
+# Step 9 - accuracy
+import numpy as np
+from numpy.typing import NDArray
+
+
+def accuracy(logits_or_probs: NDArray, labels: NDArray) -> float:
+    '''return the fraction of rows whose argmax matches the integer label.'''
+
+    return np.mean((logits_or_probs.argmax(axis=-1) == labels))
 
 # Step 10 - he_std (not yet solved)
 # TODO: implement
