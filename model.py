@@ -98,8 +98,14 @@ def accuracy(logits_or_probs: NDArray, labels: NDArray) -> float:
 
     return np.mean((logits_or_probs.argmax(axis=-1) == labels))
 
-# Step 10 - he_std (not yet solved)
-# TODO: implement
+# Step 10 - he_std
+import numpy as np
+
+
+def he_std(fan_in: int) -> float:
+    '''return the He initialization standard deviation sqrt(2 / fan_in).'''
+
+    return np.sqrt(2 / fan_in)
 
 # Step 11 - he_init (not yet solved)
 # TODO: implement
