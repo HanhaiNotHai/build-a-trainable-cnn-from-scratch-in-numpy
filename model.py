@@ -69,6 +69,7 @@ def one_hot(labels: NDArray, num_classes: int):
     return matrix
 
 # Step 7 - gather_true_class_probs
+import numpy as np
 from numpy.typing import NDArray
 
 
