@@ -78,6 +78,7 @@ def gather_true_class_probs(probs: NDArray, labels: NDArray):
     return probs[np.arange(labels.size), labels]
 
 # Step 8 - cross_entropy_loss
+import numpy as np
 from numpy.typing import NDArray
 
 
