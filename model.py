@@ -479,8 +479,15 @@ def sgd_step(param: NDArray, grad: NDArray, lr: float):
     
     return param - lr * grad
 
-# Step 37 - adam_update_m (not yet solved)
-# TODO: implement
+# Step 37 - adam_update_m
+import numpy as np
+from numpy.typing import NDArray
+
+
+def adam_update_m(m: NDArray, grad: NDArray, beta_one: float):
+    '''return the updated first moment estimate using beta_one and grad.'''
+
+    return beta_one * m + (1 - beta_one) * grad
 
 # Step 38 - adam_update_v (not yet solved)
 # TODO: implement
