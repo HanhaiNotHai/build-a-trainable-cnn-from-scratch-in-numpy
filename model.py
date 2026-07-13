@@ -621,8 +621,16 @@ def lenet_forward(x: NDArray, params: dict[str, dict[str, NDArray]]):
         'classifier': classifier,
     }
 
-# Step 48 - backward_conv_block (not yet solved)
-# TODO: implement
+# Step 48 - backward_conv_block
+from numpy.typing import NDArray
+
+
+def backward_conv_block(dout: NDArray, cache: dict):
+    '''backprop dout through the cached pool, relu, and conv layers in reverse order.'''
+
+    dout = maxpool2d_backward(dout, cache['pool_cache'])
+    dout = relu_backward(dout, cache['relu_cache'])
+    return conv2d_backward(dout, cache['conv_cache'])
 
 # Step 49 - backward_classifier_block (not yet solved)
 # TODO: implement
