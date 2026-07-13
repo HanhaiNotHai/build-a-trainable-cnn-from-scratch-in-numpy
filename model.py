@@ -389,8 +389,14 @@ def flatten_backward(d_out: NDArray, cache: dict[str, tuple[int, ...]]):
     
     return d_out.reshape(cache['x_shape'])
 
-# Step 29 - linear_forward (not yet solved)
-# TODO: implement
+# Step 29 - linear_forward
+from numpy.typing import NDArray
+
+
+def linear_forward(x: NDArray, weights: NDArray, bias: NDArray):
+    '''compute X @ W + b and cache the inputs needed for backprop.'''
+
+    return x @ weights + bias, {'x': x, 'weights': weights}
 
 # Step 30 - linear_grad_input (not yet solved)
 # TODO: implement
