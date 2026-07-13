@@ -469,8 +469,15 @@ def softmax_cross_entropy_backward(logits: NDArray, y: NDArray) -> NDArray:
 
     return dlogits
 
-# Step 36 - sgd_step (not yet solved)
-# TODO: implement
+# Step 36 - sgd_step
+import numpy as np
+from numpy.typing import NDArray
+
+
+def sgd_step(param: NDArray, grad: NDArray, lr: float):
+    '''return the SGD-updated parameter array (param - lr * grad).'''
+    
+    return param - lr * grad
 
 # Step 37 - adam_update_m (not yet solved)
 # TODO: implement
