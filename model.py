@@ -499,8 +499,14 @@ def adam_update_v(v: NDArray, grad: NDArray, beta_two: float):
 
     return beta_two * v + (1 - beta_two) * grad**2
 
-# Step 39 - adam_bias_correct (not yet solved)
-# TODO: implement
+# Step 39 - adam_bias_correct
+from numpy.typing import NDArray
+
+
+def adam_bias_correct(moment: NDArray, beta: float, t: int):
+    '''return moment divided by (1 - beta**t) to undo Adam's zero-init bias.'''
+
+    return moment / (1 - beta**t)
 
 # Step 40 - adam_param_step (not yet solved)
 # TODO: implement
