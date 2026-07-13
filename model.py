@@ -86,7 +86,7 @@ from numpy.typing import NDArray
 def cross_entropy_loss(probs: NDArray, labels: NDArray, eps: float = 1e-12):
     '''return the mean negative log-likelihood of the true-class probabilities'''
 
-    return np.mean(-np.log(gather_true_class_probs(probs + eps, labels)))
+    return -np.mean(np.log(gather_true_class_probs(probs + eps, labels)))
 
 # Step 9 - accuracy
 import numpy as np
