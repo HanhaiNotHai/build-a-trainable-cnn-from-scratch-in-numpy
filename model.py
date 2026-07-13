@@ -679,8 +679,24 @@ def lenet_predict(x: NDArray, params: dict) -> NDArray:
 
     return lenet_forward(x, params)[0].argmax(axis=-1)
 
-# Step 52 - build_synthetic_image_dataset (not yet solved)
-# TODO: implement
+# Step 52 - build_synthetic_image_dataset
+import numpy as np
+from numpy.typing import NDArray
+
+
+def build_synthetic_image_dataset(
+    num_samples: int, num_classes: int, image_size: int, in_channels: int = 1, seed=0
+):
+    '''Return (x, y) for a reproducible synthetic NCHW image dataset.'''
+
+    rng = np.random.default_rng(seed)
+
+    y = rng.integers(0, num_classes, num_samples)
+    x = rng.standard_normal((num_samples, in_channels, image_size, image_size))
+    for k in range(num_classes):
+        x[y == k] += k - (num_classes) / 2
+
+    return x, y
 
 # Step 53 - shuffle_indices (not yet solved)
 # TODO: implement
