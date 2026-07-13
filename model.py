@@ -744,7 +744,7 @@ def iterate_minibatches(x: NDArray, y: NDArray, batch_size: int, seed=0):
         yield x[batch_indices], y[batch_indices]
 
 # Step 56 - train_step
-from collections import defaultdict
+from copy import deepcopy
 
 from numpy.typing import NDArray
 
@@ -766,8 +766,8 @@ def train_step(
     loss = softmax_cross_entropy_forward(logits, yb)
     dlogits = softmax_cross_entropy_backward(logits, yb)
     grads = lenet_backward(dlogits, caches)
-    new_params = defaultdict(dict)
-    new_opt_state = defaultdict(lambda: defaultdict(dict))
+    params = deepcopy(params)
+    opt_state = deepcopy(opt_state)
     for layer_name in params:
         p_layer = params[layer_name]
         opt_layer = opt_state[layer_name]
@@ -776,12 +776,10 @@ def train_step(
             p = p_layer[p_name]
             opt = opt_layer[p_name]
             grad = grad_layer['d' + p_name]
-            (
-                new_params[layer_name][p_name],
-                new_opt_state[layer_name][p_name]['m'],
-                new_opt_state[layer_name][p_name]['v'],
-            ) = adam_step(p, grad, opt['m'], opt['v'], step, lr, beta_one, beta_two, eps)
-    return new_params, new_opt_state, loss
+            p[:], opt['m'], opt['v'] = adam_step(
+                p, grad, opt['m'], opt['v'], step, lr, beta_one, beta_two, eps
+            )
+    return params, opt_state, loss
 
 # Step 57 - train_one_epoch (not yet solved)
 # TODO: implement
