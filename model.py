@@ -450,8 +450,24 @@ def softmax_cross_entropy_forward(logits: NDArray, y: NDArray):
 
     return cross_entropy_loss(stable_softmax(logits), y) + 0
 
-# Step 35 - softmax_cross_entropy_backward (not yet solved)
-# TODO: implement
+# Step 35 - softmax_cross_entropy_backward
+import numpy as np
+from numpy.typing import NDArray
+
+
+def softmax_cross_entropy_backward(logits: NDArray, y: NDArray) -> NDArray:
+    '''return the fused softmax-cross-entropy gradient of shape (N, C).'''
+
+    N, C = logits.shape
+
+    dlogits = stable_softmax(logits)
+    dlogits[np.arange(N), y] -= 1.0
+    dlogits /= N
+
+    # 理论上所有元素之和为 0，修正浮点计算产生的微小残差
+    dlogits.flat[-1] -= dlogits.sum()
+
+    return dlogits
 
 # Step 36 - sgd_step (not yet solved)
 # TODO: implement
