@@ -670,8 +670,14 @@ def lenet_backward(dlogits: NDArray, caches: dict):
     grads['conv1'] = {'dW': dW, 'db': db}
     return grads
 
-# Step 51 - lenet_predict (not yet solved)
-# TODO: implement
+# Step 51 - lenet_predict
+from numpy.typing import NDArray
+
+
+def lenet_predict(x: NDArray, params: dict) -> NDArray:
+    '''Return the argmax class index per sample from a LeNet forward pass.'''
+
+    return lenet_forward(x, params)[0].argmax(axis=-1)
 
 # Step 52 - build_synthetic_image_dataset (not yet solved)
 # TODO: implement
