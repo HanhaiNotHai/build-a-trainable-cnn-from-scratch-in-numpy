@@ -489,8 +489,15 @@ def adam_update_m(m: NDArray, grad: NDArray, beta_one: float):
 
     return beta_one * m + (1 - beta_one) * grad
 
-# Step 38 - adam_update_v (not yet solved)
-# TODO: implement
+# Step 38 - adam_update_v
+import numpy as np
+from numpy.typing import NDArray
+
+
+def adam_update_v(v: NDArray, grad: NDArray, beta_two: float):
+    '''return the updated Adam second moment estimate as an EMA of squared gradients.'''
+
+    return beta_two * v + (1 - beta_two) * grad**2
 
 # Step 39 - adam_bias_correct (not yet solved)
 # TODO: implement
