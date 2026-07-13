@@ -224,8 +224,10 @@ def conv2d_forward(x: NDArray, weights: NDArray, bias: NDArray, stride: int, pad
         'kernel_w': kernel_w,
     }
 
-# Step 18 - conv2d_grad_input (not yet solved)
-# TODO: implement
+# Step 18 - conv2d_grad_input
+def conv2d_grad_input(d_out, cache):
+    # TODO: backprop d_out through the conv input using col2im
+    pass
 
 # Step 19 - conv2d_grad_weights (not yet solved)
 # TODO: implement
