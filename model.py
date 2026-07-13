@@ -729,8 +729,19 @@ def train_test_split(x: NDArray, y: NDArray, test_fraction: float = 0.2, seed=0)
         y[indices[:test_num]],
     )
 
-# Step 55 - iterate_minibatches (not yet solved)
-# TODO: implement
+# Step 55 - iterate_minibatches
+from numpy.typing import NDArray
+
+
+def iterate_minibatches(x: NDArray, y: NDArray, batch_size: int, seed=0):
+    '''yield shuffled mini-batches of features and labels for one epoch of training.'''
+
+    N = x.shape[0]
+    num_batches = N // batch_size
+    indices = shuffle_indices(N, seed)
+    for i in range(num_batches):
+        batch_indices = indices[i * batch_size : (i + 1) * batch_size]
+        yield x[batch_indices], y[batch_indices]
 
 # Step 56 - train_step (not yet solved)
 # TODO: implement
