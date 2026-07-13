@@ -781,8 +781,33 @@ def train_step(
             )
     return params, opt_state, loss
 
-# Step 57 - train_one_epoch (not yet solved)
-# TODO: implement
+# Step 57 - train_one_epoch
+from numpy.typing import NDArray
+
+
+def train_one_epoch(
+    params: dict[str, dict[str, NDArray]],
+    opt_state: dict[str, dict[str, NDArray]],
+    x: NDArray,
+    y: NDArray,
+    batch_size: int,
+    lr: float,
+    beta_one: float,
+    beta_two: float,
+    eps: float,
+    step_counter: int,
+    seed=0,
+):
+    '''iterate minibatches and apply one train_step per batch, tracking losses and step_counter.'''
+
+    losses = []
+    for xb, yb in iterate_minibatches(x, y, batch_size, seed):
+        step_counter += 1
+        params, opt_state, loss = train_step(
+            params, opt_state, xb, yb, lr, beta_one, beta_two, eps, step_counter
+        )
+        losses.append(loss)
+    return params, opt_state, step_counter, losses
 
 # Step 58 - train_loop (not yet solved)
 # TODO: implement
