@@ -225,9 +225,28 @@ def conv2d_forward(x: NDArray, weights: NDArray, bias: NDArray, stride: int, pad
     }
 
 # Step 18 - conv2d_grad_input
-def conv2d_grad_input(d_out, cache):
-    # TODO: backprop d_out through the conv input using col2im
-    pass
+from numpy.typing import NDArray
+
+
+def conv2d_grad_input(d_out: NDArray, cache: dict[str, tuple[int, ...] | NDArray | int]):
+    '''backprop d_out through the conv input using col2im'''
+
+    weights: NDArray = cache['weights']
+
+    C_out = weights.shape[0]
+
+    d_out_row = d_out.transpose(0, 2, 3, 1).reshape(-1, C_out)
+    W_row = weights.reshape(C_out, -1)
+    d_cols = d_out_row @ W_row
+    dx = col2im(
+        d_cols,
+        cache['x_shape'],
+        cache['kernel_h'],
+        cache['kernel_w'],
+        cache['stride'],
+        cache['padding'],
+    )
+    return dx
 
 # Step 19 - conv2d_grad_weights (not yet solved)
 # TODO: implement
