@@ -852,6 +852,12 @@ def train_loop(
         loss_history += losses
     return params, loss_history
 
-# Step 59 - evaluate (not yet solved)
-# TODO: implement
+# Step 59 - evaluate
+from numpy.typing import NDArray
+
+
+def evaluate(params: dict[str, dict[str, NDArray]], x: NDArray, y: NDArray):
+    '''return the fraction of samples whose predicted class equals the label.'''
+
+    return accuracy(lenet_forward(x, params)[0], y)
 
