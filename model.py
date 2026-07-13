@@ -710,8 +710,24 @@ def shuffle_indices(n: int, seed=0):
     np.random.shuffle(indices)
     return indices
 
-# Step 54 - train_test_split (not yet solved)
-# TODO: implement
+# Step 54 - train_test_split
+import numpy as np
+from numpy.typing import NDArray
+
+
+def train_test_split(x: NDArray, y: NDArray, test_fraction: float = 0.2, seed=0):
+    '''partition x and y into train and test halves using a shared shuffled order.'''
+
+    N = x.shape[0]
+
+    indices = shuffle_indices(N, seed)
+    test_num = int(N * test_fraction)
+    return (
+        x[indices[test_num:]],
+        y[indices[test_num:]],
+        x[indices[:test_num]],
+        y[indices[:test_num]],
+    )
 
 # Step 55 - iterate_minibatches (not yet solved)
 # TODO: implement
