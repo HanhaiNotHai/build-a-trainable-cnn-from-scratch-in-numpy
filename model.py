@@ -655,8 +655,20 @@ def backward_classifier_block(dlogits: NDArray, cache: dict):
         'fc2': {'dW': fc2_dW, 'db': fc2_db},
     }
 
-# Step 50 - lenet_backward (not yet solved)
-# TODO: implement
+# Step 50 - lenet_backward
+from numpy.typing import NDArray
+
+
+def lenet_backward(dlogits: NDArray, caches: dict):
+    '''walk classifier and conv block caches in reverse to assemble all gradients'''
+
+    grads = backward_classifier_block(dlogits, caches['classifier'])
+    dx = grads.pop('dx')
+    dx, dW, db = backward_conv_block(dx, caches['block2'])
+    grads['conv2'] = {'dW': dW, 'db': db}
+    dx, dW, db = backward_conv_block(dx, caches['block1'])
+    grads['conv1'] = {'dW': dW, 'db': db}
+    return grads
 
 # Step 51 - lenet_predict (not yet solved)
 # TODO: implement
