@@ -638,8 +638,22 @@ def backward_conv_block(dout: NDArray, cache: dict):
     dout = relu_backward(dout, cache['relu_cache'])
     return conv2d_backward(dout, cache['conv_cache'])
 
-# Step 49 - backward_classifier_block (not yet solved)
-# TODO: implement
+# Step 49 - backward_classifier_block
+from numpy.typing import NDArray
+
+
+def backward_classifier_block(dlogits: NDArray, cache: dict):
+    '''backprop through fc2 -> relu -> fc1 -> flatten using the cached values'''
+
+    fc2_dx, fc2_dW, fc2_db = linear_backward(dlogits, cache['fc2_cache'])
+    dx = relu_backward(fc2_dx, cache['relu_cache'])
+    fc1_dx, fc1_dW, fc1_db = linear_backward(dx, cache['fc1_cache'])
+    dx = flatten_backward(fc1_dx, cache['flatten_cache'])
+    return {
+        'dx': dx,
+        'fc1': {'dW': fc1_dW, 'db': fc1_db},
+        'fc2': {'dW': fc2_dW, 'db': fc2_db},
+    }
 
 # Step 50 - lenet_backward (not yet solved)
 # TODO: implement
