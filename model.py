@@ -360,8 +360,15 @@ def relu_forward(x: NDArray):
 
     return np.maximum(x, 0), {'x': x}
 
-# Step 26 - relu_backward (not yet solved)
-# TODO: implement
+# Step 26 - relu_backward
+import numpy as np
+from numpy.typing import NDArray
+
+
+def relu_backward(d_out: NDArray, cache: dict[str, NDArray]):
+    '''mask the upstream gradient by the positive entries of the cached input.'''
+
+    return np.where(cache['x'] > 0, d_out, 0)
 
 # Step 27 - flatten_forward (not yet solved)
 # TODO: implement
