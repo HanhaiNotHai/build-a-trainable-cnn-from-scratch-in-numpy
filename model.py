@@ -317,8 +317,13 @@ def maxpool2d_forward(x: NDArray, kernel: int, stride: int):
 import numpy as np
 
 
-def scatter_grad_window(grad_value: float, argmax_index: int, kernel: int):
+def scatter_grad_window(grad_value: float | NDArray, argmax_index: int | NDArray, kernel: int):
     '''place grad_value at the argmax position within a (kernel, kernel) zero array.'''
+
+    if isinstance(grad_value, np.ndarray) and isinstance(argmax_index, np.ndarray):
+        window = np.zeros((*grad_value.shape, kernel * kernel))
+        np.put_along_axis(window, argmax_index[..., None], grad_value[..., None], axis=-1)
+        return window.reshape(*grad_value.shape, kernel, kernel)
 
     window = np.zeros(kernel * kernel)
     window[argmax_index] = grad_value
