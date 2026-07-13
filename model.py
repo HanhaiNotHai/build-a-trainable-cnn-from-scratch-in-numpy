@@ -370,8 +370,14 @@ def relu_backward(d_out: NDArray, cache: dict[str, NDArray]):
 
     return np.where(cache['x'] > 0, d_out, 0)
 
-# Step 27 - flatten_forward (not yet solved)
-# TODO: implement
+# Step 27 - flatten_forward
+from numpy.typing import NDArray
+
+
+def flatten_forward(x: NDArray):
+    '''reshape a 4D feature map into a 2D batch matrix and cache the original shape'''
+
+    return x.reshape(x.shape[0], -1), {'x_shape': x.shape}
 
 # Step 28 - flatten_backward (not yet solved)
 # TODO: implement
