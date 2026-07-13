@@ -428,8 +428,18 @@ def linear_grad_bias(dout: NDArray) -> NDArray:
 
     return dout.sum(axis=0)
 
-# Step 33 - linear_backward (not yet solved)
-# TODO: implement
+# Step 33 - linear_backward
+from numpy.typing import NDArray
+
+
+def linear_backward(dout: NDArray, cache: dict[str, NDArray]):
+    '''combine input, weight, and bias gradients for a linear layer using the cache'''
+
+    return (
+        linear_grad_input(dout, cache),
+        linear_grad_weights(cache['x'], dout),
+        linear_grad_bias(dout),
+    )
 
 # Step 34 - softmax_cross_entropy_forward (not yet solved)
 # TODO: implement
