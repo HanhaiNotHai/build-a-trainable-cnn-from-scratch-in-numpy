@@ -518,8 +518,29 @@ def adam_param_step(param: NDArray, m_hat: NDArray, v_hat: NDArray, lr: float, e
 
     return param - lr * m_hat / (np.sqrt(v_hat) + eps)
 
-# Step 41 - adam_step (not yet solved)
-# TODO: implement
+# Step 41 - adam_step
+import numpy as np
+from numpy.typing import NDArray
+
+
+def adam_step(
+    param: NDArray,
+    grad: NDArray,
+    m: NDArray,
+    v: NDArray,
+    t: int,
+    lr: float,
+    beta_one: float,
+    beta_two: float,
+    eps: float,
+):
+    '''chain the four Adam helpers and return (new_param, new_m, new_v)'''
+
+    m = adam_update_m(m, grad, beta_one)
+    v = adam_update_v(v, grad, beta_two)
+    m_hat = adam_bias_correct(m, beta_one, t)
+    v_hat = adam_bias_correct(v, beta_two, t)
+    return adam_param_step(param, m_hat, v_hat, lr, eps), m, v
 
 # Step 42 - init_conv_layer (not yet solved)
 # TODO: implement
