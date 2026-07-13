@@ -508,8 +508,15 @@ def adam_bias_correct(moment: NDArray, beta: float, t: int):
 
     return moment / (1 - beta**t)
 
-# Step 40 - adam_param_step (not yet solved)
-# TODO: implement
+# Step 40 - adam_param_step
+import numpy as np
+from numpy.typing import NDArray
+
+
+def adam_param_step(param: NDArray, m_hat: NDArray, v_hat: NDArray, lr: float, eps: float):
+    '''apply one Adam parameter update using bias-corrected moments'''
+
+    return param - lr * m_hat / (np.sqrt(v_hat) + eps)
 
 # Step 41 - adam_step (not yet solved)
 # TODO: implement
