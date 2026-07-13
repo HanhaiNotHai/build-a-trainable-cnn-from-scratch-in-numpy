@@ -448,7 +448,7 @@ from numpy.typing import NDArray
 def softmax_cross_entropy_forward(logits: NDArray, y: NDArray):
     '''return the mean cross-entropy loss for logits (N, C) and integer labels y (N,).'''
 
-    return cross_entropy_loss(stable_softmax(logits), y)
+    return cross_entropy_loss(stable_softmax(logits), y) + 0
 
 # Step 35 - softmax_cross_entropy_backward (not yet solved)
 # TODO: implement
