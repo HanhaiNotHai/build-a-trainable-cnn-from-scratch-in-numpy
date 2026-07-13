@@ -270,7 +270,7 @@ def conv2d_grad_weights(d_out: NDArray, cache: dict[str, tuple[int, ...] | NDArr
 from numpy.typing import NDArray
 
 
-def conv2d_grad_bias(d_out: NDArray):
+def conv2d_grad_bias(d_out: NDArray) -> NDArray:
     '''return a length C_out gradient by reducing d_out over batch and spatial axes'''
 
     return d_out.sum(axis=(0, 2, 3))
