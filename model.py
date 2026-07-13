@@ -315,6 +315,7 @@ def maxpool2d_forward(x: NDArray, kernel: int, stride: int):
 
 # Step 23 - scatter_grad_window
 import numpy as np
+from numpy.typing import NDArray
 
 
 def scatter_grad_window(grad_value: float | NDArray, argmax_index: int | NDArray, kernel: int):
