@@ -379,8 +379,15 @@ def flatten_forward(x: NDArray):
 
     return x.reshape(x.shape[0], -1), {'x_shape': x.shape}
 
-# Step 28 - flatten_backward (not yet solved)
-# TODO: implement
+# Step 28 - flatten_backward
+import numpy as np
+from numpy.typing import NDArray
+
+
+def flatten_backward(d_out: NDArray, cache: dict[str, tuple[int, ...]]):
+    '''reshape the upstream gradient back to the original 4D feature map shape.'''
+    
+    return d_out.reshape(cache['x_shape'])
 
 # Step 29 - linear_forward (not yet solved)
 # TODO: implement
