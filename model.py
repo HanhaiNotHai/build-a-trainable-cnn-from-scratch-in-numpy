@@ -605,8 +605,21 @@ def forward_classifier_block(x: NDArray, fc1: dict[str, NDArray], fc2: dict[str,
         'fc2_cache': fc2_cache,
     }
 
-# Step 47 - lenet_forward (not yet solved)
-# TODO: implement
+# Step 47 - lenet_forward
+from numpy.typing import NDArray
+
+
+def lenet_forward(x: NDArray, params: dict[str, dict[str, NDArray]]):
+    '''run two conv blocks then the classifier block and return (logits, caches).'''
+
+    y, block1 = forward_conv_block(x, params['conv1']['W'], params['conv1']['b'], 2, 1, 0)
+    y, block2 = forward_conv_block(y, params['conv2']['W'], params['conv2']['b'], 2, 1, 0)
+    y, classifier = forward_classifier_block(y, params['fc1'], params['fc2'])
+    return y, {
+        'block1': block1,
+        'block2': block2,
+        'classifier': classifier,
+    }
 
 # Step 48 - backward_conv_block (not yet solved)
 # TODO: implement
