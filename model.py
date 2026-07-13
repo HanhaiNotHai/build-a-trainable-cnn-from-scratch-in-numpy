@@ -350,8 +350,15 @@ def maxpool2d_backward(d_out: NDArray, cache: dict[str, tuple[int, ...] | NDArra
 
     return d_maxpool2d
 
-# Step 25 - relu_forward (not yet solved)
-# TODO: implement
+# Step 25 - relu_forward
+import numpy as np
+from numpy.typing import NDArray
+
+
+def relu_forward(x: NDArray):
+    '''Compute the elementwise ReLU and cache the input for backprop.'''
+
+    return np.maximum(x, 0), {'x': x}
 
 # Step 26 - relu_backward (not yet solved)
 # TODO: implement
