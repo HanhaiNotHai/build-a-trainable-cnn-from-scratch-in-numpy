@@ -809,8 +809,48 @@ def train_one_epoch(
         losses.append(loss)
     return params, opt_state, step_counter, losses
 
-# Step 58 - train_loop (not yet solved)
-# TODO: implement
+# Step 58 - train_loop
+from numpy.typing import NDArray
+
+
+def train_loop(
+    params: dict[str, dict[str, NDArray]],
+    x_train: NDArray,
+    y_train: NDArray,
+    num_epochs: int,
+    batch_size: int,
+    lr: float = 1e-3,
+    beta_one: float = 0.9,
+    beta_two: float = 0.999,
+    eps: float = 1e-8,
+    seed=0,
+):
+    '''initialize Adam state, loop epochs calling train_one_epoch, return (params, loss_history).'''
+
+    opt_state = {
+        layer_name: {
+            p_name: {'m': np.zeros_like(p), 'v': np.zeros_like(p)} for p_name, p in layer.items()
+        }
+        for layer_name, layer in params.items()
+    }
+    step_counter = 0
+    loss_history = []
+    for _ in range(num_epochs):
+        params, opt_state, step_counter, losses = train_one_epoch(
+            params,
+            opt_state,
+            x_train,
+            y_train,
+            batch_size,
+            lr,
+            beta_one,
+            beta_two,
+            eps,
+            step_counter,
+            seed,
+        )
+        loss_history += losses
+    return params, loss_history
 
 # Step 59 - evaluate (not yet solved)
 # TODO: implement
