@@ -398,8 +398,15 @@ def linear_forward(x: NDArray, weights: NDArray, bias: NDArray):
 
     return x @ weights + bias, {'x': x, 'weights': weights}
 
-# Step 30 - linear_grad_input (not yet solved)
-# TODO: implement
+# Step 30 - linear_grad_input
+import numpy as np
+from numpy.typing import NDArray
+
+
+def linear_grad_input(d_out: NDArray, cache: dict[str, NDArray]):
+    """Gradient of a linear layer w.r.t. its input X."""
+    
+    return d_out @ cache['weights'].T
 
 # Step 31 - linear_grad_weights (not yet solved)
 # TODO: implement
