@@ -167,9 +167,36 @@ def im2col(images: NDArray, kernel_h: int, kernel_w: int, stride: int, padding: 
     return cols.reshape(N * out_h * out_w, C * kernel_h * kernel_w)
 
 # Step 16 - col2im
-def col2im(cols, input_shape, kernel_h, kernel_w, stride, padding):
-    # TODO: re-roll a (N*out_h*out_w, C*kh*kw) column matrix back into a (N, C, H, W) tensor
-    pass
+import numpy as np
+from numpy.typing import NDArray
+
+
+def col2im(
+    cols: NDArray,
+    input_shape: tuple[int, ...],
+    kernel_h: int,
+    kernel_w: int,
+    stride: int,
+    padding: int,
+):
+    '''re-roll a (N*out_h*out_w, C*kh*kw) column matrix back into a (N, C, H, W) tensor'''
+
+    N, C, H, W = input_shape
+
+    out_h = output_spatial_size(H, kernel_h, stride, padding)
+    out_w = output_spatial_size(W, kernel_w, stride, padding)
+
+    cols = cols.reshape(N, out_h, out_w, C, kernel_h, kernel_w)
+
+    padded = np.zeros((N, C, H + 2 * padding, W + 2 * padding), dtype=cols.dtype)
+    for i in range(kernel_h):
+        h_slice = slice(i, i + out_h * stride, stride)
+        for j in range(kernel_w):
+            w_slice = slice(j, j + out_w * stride, stride)
+            padded[..., h_slice, w_slice] += cols[..., i, j].transpose(0, 3, 1, 2)
+
+    images = padded[..., padding:-padding, padding:-padding] if padding else padded
+    return images
 
 # Step 17 - conv2d_forward (not yet solved)
 # TODO: implement
