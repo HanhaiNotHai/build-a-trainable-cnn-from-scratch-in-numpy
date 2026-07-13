@@ -681,7 +681,6 @@ def lenet_predict(x: NDArray, params: dict) -> NDArray:
 
 # Step 52 - build_synthetic_image_dataset
 import numpy as np
-from numpy.typing import NDArray
 
 
 def build_synthetic_image_dataset(
