@@ -288,8 +288,30 @@ def conv2d_backward(d_out: NDArray, cache: dict[str, tuple[int, ...] | NDArray |
         conv2d_grad_bias(d_out),
     )
 
-# Step 22 - maxpool2d_forward (not yet solved)
-# TODO: implement
+# Step 22 - maxpool2d_forward
+import numpy as np
+from numpy.typing import NDArray
+
+
+def maxpool2d_forward(x: NDArray, kernel: int, stride: int):
+    '''run 2D max pooling and cache the in-window argmax of each output cell.'''
+
+    N, C, H, W = x.shape
+
+    out_h = (H - kernel) // stride + 1
+    out_w = (W - kernel) // stride + 1
+
+    out = np.empty((N, C, out_h, out_w), dtype=x.dtype)
+    argmax = np.empty((N, C, out_h, out_w), dtype=np.int64)
+    for i in range(out_h):
+        h_slice = slice(i * stride, i * stride + kernel)
+        for j in range(out_w):
+            w_slice = slice(j * stride, j * stride + kernel)
+            window = x[..., h_slice, w_slice]
+            out[..., i, j] = np.max(window, axis=(-1, -2))
+            argmax[..., i, j] = np.argmax(window.reshape(N, C, -1), axis=-1)
+
+    return out, {'x_shape': x.shape, 'argmax': argmax, 'kernel': kernel, 'stride': stride}
 
 # Step 23 - scatter_grad_window (not yet solved)
 # TODO: implement
