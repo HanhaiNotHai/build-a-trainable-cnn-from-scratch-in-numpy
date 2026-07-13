@@ -157,17 +157,19 @@ def im2col(images: NDArray, kernel_h: int, kernel_w: int, stride: int, padding: 
     out_h = output_spatial_size(H, kernel_h, stride, padding)
     out_w = output_spatial_size(W, kernel_w, stride, padding)
 
-    patches = np.empty((N, out_h, out_w, C, kernel_h, kernel_w), dtype=images.dtype)
+    cols = np.empty((N, out_h, out_w, C, kernel_h, kernel_w), dtype=images.dtype)
     for i in range(kernel_h):
         h_slice = slice(i, i + out_h * stride, stride)
         for j in range(kernel_w):
             w_slice = slice(j, j + out_w * stride, stride)
-            patches[..., i, j] = padded[..., h_slice, w_slice].transpose(0, 2, 3, 1)
+            cols[..., i, j] = padded[..., h_slice, w_slice].transpose(0, 2, 3, 1)
 
-    return patches.reshape(N * out_h * out_w, C * kernel_h * kernel_w)
+    return cols.reshape(N * out_h * out_w, C * kernel_h * kernel_w)
 
-# Step 16 - col2im (not yet solved)
-# TODO: implement
+# Step 16 - col2im
+def col2im(cols, input_shape, kernel_h, kernel_w, stride, padding):
+    # TODO: re-roll a (N*out_h*out_w, C*kh*kw) column matrix back into a (N, C, H, W) tensor
+    pass
 
 # Step 17 - conv2d_forward (not yet solved)
 # TODO: implement
