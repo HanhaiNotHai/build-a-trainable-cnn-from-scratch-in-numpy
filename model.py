@@ -587,8 +587,23 @@ def forward_conv_block(x: NDArray, W: NDArray, b: NDArray, pool_size: int, strid
     y, pool_cache = maxpool2d_forward(y, pool_size, pool_size)
     return y, {'conv_cache': conv_cache, 'relu_cache': relu_cache, 'pool_cache': pool_cache}
 
-# Step 46 - forward_classifier_block (not yet solved)
-# TODO: implement
+# Step 46 - forward_classifier_block
+from numpy.typing import NDArray
+
+
+def forward_classifier_block(x: NDArray, fc1: dict[str, NDArray], fc2: dict[str, NDArray]):
+    '''run flatten -> linear -> relu -> linear and return logits plus a cache dict.'''
+
+    y, flatten_cache = flatten_forward(x)
+    y, fc1_cache = linear_forward(y, fc1['W'], fc1['b'])
+    y, relu_cache = relu_forward(y)
+    y, fc2_cache = linear_forward(y, fc2['W'], fc2['b'])
+    return y, {
+        'flatten_cache': flatten_cache,
+        'fc1_cache': fc1_cache,
+        'relu_cache': relu_cache,
+        'fc2_cache': fc2_cache,
+    }
 
 # Step 47 - lenet_forward (not yet solved)
 # TODO: implement
