@@ -275,8 +275,18 @@ def conv2d_grad_bias(d_out: NDArray) -> NDArray:
 
     return d_out.sum(axis=(0, 2, 3))
 
-# Step 21 - conv2d_backward (not yet solved)
-# TODO: implement
+# Step 21 - conv2d_backward
+from numpy.typing import NDArray
+
+
+def conv2d_backward(d_out: NDArray, cache: dict[str, tuple[int, ...] | NDArray | int]):
+    '''return (dx, dW, db) using the conv2d gradient helpers and the forward cache'''
+
+    return (
+        conv2d_grad_input(d_out, cache),
+        conv2d_grad_weights(d_out, cache),
+        conv2d_grad_bias(d_out),
+    )
 
 # Step 22 - maxpool2d_forward (not yet solved)
 # TODO: implement
