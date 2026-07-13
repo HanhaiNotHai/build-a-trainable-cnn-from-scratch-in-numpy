@@ -266,8 +266,14 @@ def conv2d_grad_weights(d_out: NDArray, cache: dict[str, tuple[int, ...] | NDArr
     d_W = d_W_row.reshape(C_out, C_in, kernel_h, kernel_w)
     return d_W
 
-# Step 20 - conv2d_grad_bias (not yet solved)
-# TODO: implement
+# Step 20 - conv2d_grad_bias
+from numpy.typing import NDArray
+
+
+def conv2d_grad_bias(d_out: NDArray):
+    '''return a length C_out gradient by reducing d_out over batch and spatial axes'''
+
+    return d_out.sum(axis=(0, 2, 3))
 
 # Step 21 - conv2d_backward (not yet solved)
 # TODO: implement
